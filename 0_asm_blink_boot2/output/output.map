@@ -1,0 +1,85 @@
+
+Discarded input sections
+
+ .text          0x00000000        0x0 build/crc.o
+ .data          0x00000000        0x0 build/crc.o
+ .bss           0x00000000        0x0 build/crc.o
+ .text          0x00000000        0x0 build/rp2040_blink.o
+ .data          0x00000000        0x0 build/rp2040_blink.o
+ .bss           0x00000000        0x0 build/rp2040_blink.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+flash            0x10000000         0x00200000         xr
+sram             0x20000000         0x00040000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD build/crc.o
+LOAD build/rp2040_blink.o
+
+.text           0x10000000      0x100
+ *(.boot2*)
+ .boot2         0x10000000       0x68 build/rp2040_blink.o
+                0x10000000                boot2_start
+                0x100000fc                        . = (ORIGIN (flash) + 0xfc)
+ *fill*         0x10000068       0x94 
+ *(.crc*)
+ .crc           0x100000fc        0x4 build/crc.o
+                0x100000fc                crc
+ *(.crc*)
+OUTPUT(output/output.elf elf32-littlearm)
+LOAD linker stubs
+
+.glue_7         0x10000100        0x0
+ .glue_7        0x10000100        0x0 linker stubs
+
+.glue_7t        0x10000100        0x0
+ .glue_7t       0x10000100        0x0 linker stubs
+
+.vfp11_veneer   0x10000100        0x0
+ .vfp11_veneer  0x10000100        0x0 linker stubs
+
+.v4_bx          0x10000100        0x0
+ .v4_bx         0x10000100        0x0 linker stubs
+
+.debug_info     0x00000000       0x73
+ .debug_info    0x00000000       0x4f build/crc.o
+ .debug_info    0x0000004f       0x24 build/rp2040_blink.o
+
+.debug_abbrev   0x00000000       0x54
+ .debug_abbrev  0x00000000       0x40 build/crc.o
+ .debug_abbrev  0x00000040       0x14 build/rp2040_blink.o
+
+.debug_aranges  0x00000000       0x38
+ .debug_aranges
+                0x00000000       0x18 build/crc.o
+ .debug_aranges
+                0x00000018       0x20 build/rp2040_blink.o
+
+.debug_line     0x00000000       0xa4
+ .debug_line    0x00000000       0x2c build/crc.o
+ .debug_line    0x0000002c       0x78 build/rp2040_blink.o
+
+.debug_str      0x00000000      0x10a
+ .debug_str     0x00000000      0x10a build/crc.o
+                                 0xed (size before relaxing)
+ .debug_str     0x0000010a       0x70 build/rp2040_blink.o
+
+.comment        0x00000000       0x1e
+ .comment       0x00000000       0x1e build/crc.o
+                                 0x1f (size before relaxing)
+
+.ARM.attributes
+                0x00000000       0x2a
+ .ARM.attributes
+                0x00000000       0x2c build/crc.o
+ .ARM.attributes
+                0x0000002c       0x21 build/rp2040_blink.o
+
+.debug_line_str
+                0x00000000       0x64
+ .debug_line_str
+                0x00000000       0x64 build/rp2040_blink.o

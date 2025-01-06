@@ -40,15 +40,17 @@ build/compCrc32 build/$filename.bin
 file="$TOOLCHAIN_GCC build/crc.c $INLCUDES -o build/crc.o $GCC_FLAGS"
 $file
 
+mkdir -p output
+
 # --gc-sections - remove not referenced code
 LINKER_FLAGS="-nostartfiles -Wl,--gc-sections -mcpu=cortex-m0plus -nostdlib"
-linker="$TOOLCHAIN_GCC build/*.o -T$LINKER_SCRIPT -o output.elf  -Xlinker -Map=output.map $LINKER_FLAGS"
+linker="$TOOLCHAIN_GCC build/*.o -T$LINKER_SCRIPT -o output/output.elf  -Xlinker -Map=output/output.map $LINKER_FLAGS"
 echo -e "\033[0;32mLinking\033[0m"
 $linker
 
-$TOOLCHAIN_OBJDUMP -S -d -mcortex-m0plus output.elf > output.asm
-$TOOLCHAIN_OBJCOPY -O ihex output.elf output.hex
-$TOOLCHAIN_OBJCOPY -O binary output.elf output.bin
-$TOOLCHAIN_SIZE "output.elf"
+$TOOLCHAIN_OBJDUMP -S -d -mcortex-m0plus output/output.elf > output/output.asm
+$TOOLCHAIN_OBJCOPY -O ihex output/output.elf output/output.hex
+$TOOLCHAIN_OBJCOPY -O binary output/output.elf output/output.bin
+$TOOLCHAIN_SIZE "output/output.elf"
 echo -e "\033[0;32mGenerating uf2 file\033[0m"
-python3 ../utils/uf2conv.py -b 0x10000000 -f 0xe48bff56 -c output.bin -o output.uf2
+python3 ../utils/uf2conv.py -b 0x10000000 -f 0xe48bff56 -c output/output.bin -o output/output.uf2
