@@ -13,3 +13,8 @@
  -c "program output/output.elf" \
  -c "reset" \
  -c "exit"
+
+ # program file.elf verify
+ # if verification used it always fail when SPI peripheral SSI
+ # is configured in normal mode, beause it only supports XIP in such situation
+ # Flash memory readings is working only in Quad mode.(perhaps dual also see rp2040  SSI doc)
