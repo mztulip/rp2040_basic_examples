@@ -1,0 +1,243 @@
+Archive member included to satisfy reference by file (symbol)
+
+/usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+                              build/main.o (__aeabi_uidivmod)
+/usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+                              /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+
+Discarded input sections
+
+ .data          0x00000000        0x0 build/boot2.o
+ .bss           0x00000000        0x0 build/boot2.o
+ .text          0x00000000        0x0 build/crc.o
+ .data          0x00000000        0x0 build/crc.o
+ .bss           0x00000000        0x0 build/crc.o
+ .text          0x00000000        0x0 build/main.o
+ .data          0x00000000        0x0 build/main.o
+ .bss           0x00000000        0x0 build/main.o
+ .rodata.counter_max
+                0x00000000        0x4 build/main.o
+ .text          0x00000000        0x0 build/vectors_startup.o
+ .data          0x00000000        0x0 build/vectors_startup.o
+ .bss           0x00000000        0x0 build/vectors_startup.o
+ .data          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+flash            0x10000000         0x00200000         xr
+sram             0x20000000         0x00040000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD build/boot2.o
+LOAD build/crc.o
+LOAD build/main.o
+LOAD build/vectors_startup.o
+START GROUP
+LOAD /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a
+LOAD /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a
+END GROUP
+                0x00000800                        _minimum_stack_size = 0x800
+
+.text           0x10000000      0x3f8
+                0x10000000                        _start_boot2 = .
+ build/boot2.o(.text)
+ .text          0x10000000       0x4c build/boot2.o
+                0x10000000                _stage2_boot
+                0x10000034                literals
+                0x1000004c                        _end_boot2 = .
+                0x100000fc                        . = (. + (0xfc - (_end_boot2 - _start_boot2)))
+ *fill*         0x1000004c       0xb0 
+ *(.crc*)
+ .crc           0x100000fc        0x4 build/crc.o
+                0x100000fc                crc
+                0x00000100                        . = 0x100
+ *(.vectors*)
+ .vectors       0x10000100       0x10 build/vectors_startup.o
+                0x10000100                interrupt_vectors
+ *(.text*)
+ .text.delay    0x10000110       0x28 build/main.o
+                0x10000110                delay
+ .text.failed   0x10000138       0x1c build/main.o
+                0x10000138                failed
+ .text.led_on   0x10000154       0x1c build/main.o
+                0x10000154                led_on
+ .text.led_off  0x10000170       0x1c build/main.o
+                0x10000170                led_off
+ .text.check_counter_overflow
+                0x1000018c       0x24 build/main.o
+                0x1000018c                check_counter_overflow
+ .text.check_counter_compare
+                0x100001b0       0x24 build/main.o
+                0x100001b0                check_counter_compare
+ .text.set_pwm_value
+                0x100001d4       0x2c build/main.o
+                0x100001d4                set_pwm_value
+ .text.process_led_dimming
+                0x10000200       0x64 build/main.o
+                0x10000200                process_led_dimming
+ .text.init_led_gpio
+                0x10000264       0x48 build/main.o
+                0x10000264                init_led_gpio
+ .text.main     0x100002ac       0x54 build/main.o
+                0x100002ac                main
+ .text.Default_Handler
+                0x10000300        0x6 build/vectors_startup.o
+                0x10000300                HardFault_Handler
+                0x10000300                NMI_Handler
+                0x10000300                Default_Handler
+ *fill*         0x10000306        0x2 
+ .text.Reset_Handler
+                0x10000308       0x60 build/vectors_startup.o
+                0x10000308                Reset_Handler
+ .text          0x10000368       0x8c /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+                0x10000368                __udivsi3
+                0x10000368                __aeabi_uidiv
+                0x100003e0                __aeabi_uidivmod
+ .text          0x100003f4        0x4 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+                0x100003f4                __aeabi_ldiv0
+                0x100003f4                __aeabi_idiv0
+                0x100003f8                        __etext = .
+
+.glue_7         0x100003f8        0x0
+ .glue_7        0x100003f8        0x0 linker stubs
+
+.glue_7t        0x100003f8        0x0
+ .glue_7t       0x100003f8        0x0 linker stubs
+
+.vfp11_veneer   0x100003f8        0x0
+ .vfp11_veneer  0x100003f8        0x0 linker stubs
+
+.v4_bx          0x100003f8        0x0
+ .v4_bx         0x100003f8        0x0 linker stubs
+
+.iplt           0x100003f8        0x0
+ .iplt          0x100003f8        0x0 build/main.o
+
+.rel.dyn        0x100003f8        0x0
+ .rel.iplt      0x100003f8        0x0 build/main.o
+
+.data           0x20000000        0x8 load address 0x100003f8
+                0x20000000                        __data_start__ = .
+                0x20000000                        . = ALIGN (0x4)
+ *(.data*)
+ .data.counter_compare_value
+                0x20000000        0x4 build/main.o
+                0x20000000                counter_compare_value
+ .data.inc_step.0
+                0x20000004        0x4 build/main.o
+                0x20000008                        __data_end__ = .
+
+.igot.plt       0x20000008        0x0 load address 0x10000400
+ .igot.plt      0x20000008        0x0 build/main.o
+
+.bss            0x20000008        0x8 load address 0x10000400
+                0x20000008                        . = ALIGN (0x4)
+                0x20000008                        __bss_start__ = .
+ *(.bss*)
+ .bss.counter   0x20000008        0x4 build/main.o
+                0x20000008                counter
+ .bss.pwm_setpoint.1
+                0x2000000c        0x4 build/main.o
+ *(COMMON)
+                0x20000010                        . = ALIGN (0x4)
+                0x20000010                        __bss_end__ = .
+                0x20040000                        __StackTop = (ORIGIN (sram) + LENGTH (sram))
+                0x00000001                        ASSERT (((__bss_end__ + _minimum_stack_size) <= __StackTop), There is not enough space in RAM for stack.)
+OUTPUT(output/output.elf elf32-littlearm)
+LOAD linker stubs
+
+.ARM.attributes
+                0x00000000       0x2e
+ .ARM.attributes
+                0x00000000       0x22 build/boot2.o
+ .ARM.attributes
+                0x00000022       0x2c build/crc.o
+ .ARM.attributes
+                0x0000004e       0x2c build/main.o
+ .ARM.attributes
+                0x0000007a       0x2c build/vectors_startup.o
+ .ARM.attributes
+                0x000000a6       0x1e /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x000000c4       0x1e /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+
+.comment        0x00000000       0x1e
+ .comment       0x00000000       0x1e build/crc.o
+                                 0x1f (size before relaxing)
+ .comment       0x0000001e       0x1f build/main.o
+ .comment       0x0000001e       0x1f build/vectors_startup.o
+
+.debug_line     0x00000000      0x45b
+ .debug_line    0x00000000       0x70 build/boot2.o
+ .debug_line    0x00000070       0x2c build/crc.o
+ .debug_line    0x0000009c      0x219 build/main.o
+ .debug_line    0x000002b5       0xfb build/vectors_startup.o
+ .debug_line    0x000003b0       0x61 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_line    0x00000411       0x4a /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+
+.debug_line_str
+                0x00000000      0x10f
+ .debug_line_str
+                0x00000000      0x10f build/boot2.o
+                                 0x7d (size before relaxing)
+ .debug_line_str
+                0x0000010f       0x92 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_line_str
+                0x0000010f       0x92 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+
+.debug_info     0x00000000      0x418
+ .debug_info    0x00000000       0x24 build/boot2.o
+ .debug_info    0x00000024       0x4f build/crc.o
+ .debug_info    0x00000073      0x1e5 build/main.o
+ .debug_info    0x00000258      0x147 build/vectors_startup.o
+ .debug_info    0x0000039f       0x3d /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_info    0x000003dc       0x3c /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+
+.debug_abbrev   0x00000000      0x2d2
+ .debug_abbrev  0x00000000       0x14 build/boot2.o
+ .debug_abbrev  0x00000014       0x40 build/crc.o
+ .debug_abbrev  0x00000054      0x149 build/main.o
+ .debug_abbrev  0x0000019d       0xe7 build/vectors_startup.o
+ .debug_abbrev  0x00000284       0x28 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x000002ac       0x26 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+
+.debug_aranges  0x00000000      0x108
+ .debug_aranges
+                0x00000000       0x20 build/boot2.o
+ .debug_aranges
+                0x00000020       0x18 build/crc.o
+ .debug_aranges
+                0x00000038       0x68 build/main.o
+ .debug_aranges
+                0x000000a0       0x28 build/vectors_startup.o
+ .debug_aranges
+                0x000000c8       0x20 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_aranges
+                0x000000e8       0x20 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+
+.debug_str      0x00000000      0x38a
+ .debug_str     0x00000000      0x38a build/boot2.o
+                                 0x89 (size before relaxing)
+ .debug_str     0x0000038a       0xfb build/crc.o
+ .debug_str     0x0000038a      0x259 build/main.o
+ .debug_str     0x0000038a      0x1fe build/vectors_startup.o
+ .debug_str     0x0000038a       0xb9 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_str     0x0000038a       0xba /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+
+.debug_rnglists
+                0x00000000       0x62
+ .debug_rnglists
+                0x00000000       0x49 build/main.o
+ .debug_rnglists
+                0x00000049       0x19 build/vectors_startup.o
+
+.debug_frame    0x00000000      0x19c
+ .debug_frame   0x00000000      0x130 build/main.o
+ .debug_frame   0x00000130       0x4c build/vectors_startup.o
+ .debug_frame   0x0000017c       0x20 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
