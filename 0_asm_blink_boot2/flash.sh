@@ -1,8 +1,8 @@
 #!/bin/bash
 # Tested with:
-# Openocd official
+# Openocd official branch master
 # Open On-Chip Debugger 0.12.0+dev-01829-g250ab1008 (2025-01-06-18:09)
-# Openocd raspberrypi repo version 
+# Openocd raspberrypi repo version  branch sdk-2.0.0
 # Open On-Chip Debugger 0.12.0+dev-gebec950 (2025-01-11-12:30)
 
 
