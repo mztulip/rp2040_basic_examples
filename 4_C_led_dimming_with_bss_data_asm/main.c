@@ -8,7 +8,7 @@ uint32_t counter = 0;
 
 void delay(void)
 {
-    for (uint32_t i = 0; i < 123456/8; ++i)
+    for (volatile uint32_t i = 0; i < 123456/8; ++i)
     {
 
     }
@@ -125,11 +125,20 @@ void init_led_gpio(void)
     *(volatile uint32_t *) (SIO_BASE+0x24) |= 1 << 25;
 }
 
-void failed(void);
+extern uint32_t __StackTop;
 
 int main(void)
 {
     init_led_gpio();
+
+    //This is also impossible to get here without working stack
+    //If stack will be set outside of SRAM hard fault will be generated
+    //main at the beginning pushes 5 registers on stack
+    //Check if stack top is correctly defined in linker script
+    if(&__StackTop != (uint32_t*)0x20040000)
+    {
+        failed();
+    }
 
     //Check if bss init loop works
     if (counter != 0)

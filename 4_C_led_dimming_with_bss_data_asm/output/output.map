@@ -15,7 +15,7 @@ Discarded input sections
  .text          0x00000000        0x0 build/main.o
  .data          0x00000000        0x0 build/main.o
  .bss           0x00000000        0x0 build/main.o
- .text.delay    0x00000000        0x4 build/main.o
+ .text.delay    0x00000000       0x24 build/main.o
  .text.led_on   0x00000000       0x14 build/main.o
  .text.led_off  0x00000000       0x14 build/main.o
  .text.check_counter_overflow
@@ -56,7 +56,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/
 END GROUP
                 0x00000800                        _minimum_stack_size = 0x800
 
-.text           0x10000000      0x2f8
+.text           0x10000000      0x328
                 0x10000000                        _start_boot2 = .
  build/boot2.o(.text)
  .text          0x10000000       0x4c build/boot2.o
@@ -73,41 +73,41 @@ END GROUP
  .vectors       0x10000100       0x10 build/vectors_startup.o
                 0x10000100                vector_table
  *(.text*)
- .text.failed   0x10000110       0x14 build/main.o
+ .text.failed   0x10000110       0x34 build/main.o
                 0x10000110                failed
  .text.startup.main
-                0x10000124      0x10c build/main.o
-                0x10000124                main
- .text          0x10000230       0x38 build/vectors_startup.o
-                0x10000230                _reset_handler
- .text          0x10000268       0x8c /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
-                0x10000268                __udivsi3
-                0x10000268                __aeabi_uidiv
-                0x100002e0                __aeabi_uidivmod
- .text          0x100002f4        0x4 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
-                0x100002f4                __aeabi_ldiv0
-                0x100002f4                __aeabi_idiv0
-                0x100002f8                        __etext = .
+                0x10000144      0x11c build/main.o
+                0x10000144                main
+ .text          0x10000260       0x38 build/vectors_startup.o
+                0x10000260                _reset_handler
+ .text          0x10000298       0x8c /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+                0x10000298                __udivsi3
+                0x10000298                __aeabi_uidiv
+                0x10000310                __aeabi_uidivmod
+ .text          0x10000324        0x4 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+                0x10000324                __aeabi_ldiv0
+                0x10000324                __aeabi_idiv0
+                0x10000328                        __etext = .
 
-.glue_7         0x100002f8        0x0
- .glue_7        0x100002f8        0x0 linker stubs
+.glue_7         0x10000328        0x0
+ .glue_7        0x10000328        0x0 linker stubs
 
-.glue_7t        0x100002f8        0x0
- .glue_7t       0x100002f8        0x0 linker stubs
+.glue_7t        0x10000328        0x0
+ .glue_7t       0x10000328        0x0 linker stubs
 
-.vfp11_veneer   0x100002f8        0x0
- .vfp11_veneer  0x100002f8        0x0 linker stubs
+.vfp11_veneer   0x10000328        0x0
+ .vfp11_veneer  0x10000328        0x0 linker stubs
 
-.v4_bx          0x100002f8        0x0
- .v4_bx         0x100002f8        0x0 linker stubs
+.v4_bx          0x10000328        0x0
+ .v4_bx         0x10000328        0x0 linker stubs
 
-.iplt           0x100002f8        0x0
- .iplt          0x100002f8        0x0 build/main.o
+.iplt           0x10000328        0x0
+ .iplt          0x10000328        0x0 build/main.o
 
-.rel.dyn        0x100002f8        0x0
- .rel.iplt      0x100002f8        0x0 build/main.o
+.rel.dyn        0x10000328        0x0
+ .rel.iplt      0x10000328        0x0 build/main.o
 
-.data           0x20000000        0x8 load address 0x100002f8
+.data           0x20000000        0x8 load address 0x10000328
                 0x20000000                        __data_start__ = .
                 0x20000000                        . = ALIGN (0x4)
  *(.data*)
@@ -118,10 +118,10 @@ END GROUP
                 0x20000004                counter_compare_value
                 0x20000008                        __data_end__ = .
 
-.igot.plt       0x20000008        0x0 load address 0x10000300
+.igot.plt       0x20000008        0x0 load address 0x10000330
  .igot.plt      0x20000008        0x0 build/main.o
 
-.bss            0x20000008        0x8 load address 0x10000300
+.bss            0x20000008        0x8 load address 0x10000330
                 0x20000008                        . = ALIGN (0x4)
                 0x20000008                        __bss_start__ = .
  *(.bss*)
@@ -157,13 +157,13 @@ LOAD linker stubs
                                  0x1f (size before relaxing)
  .comment       0x0000001e       0x1f build/main.o
 
-.debug_line     0x00000000      0x65e
+.debug_line     0x00000000      0x6cb
  .debug_line    0x00000000       0x70 build/boot2.o
  .debug_line    0x00000070       0x2c build/crc.o
- .debug_line    0x0000009c      0x4b4 build/main.o
- .debug_line    0x00000550       0x63 build/vectors_startup.o
- .debug_line    0x000005b3       0x61 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
- .debug_line    0x00000614       0x4a /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x0000009c      0x521 build/main.o
+ .debug_line    0x000005bd       0x63 build/vectors_startup.o
+ .debug_line    0x00000620       0x61 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_line    0x00000681       0x4a /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
 
 .debug_line_str
                 0x00000000      0x125
@@ -177,21 +177,21 @@ LOAD linker stubs
  .debug_line_str
                 0x00000125       0x92 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
 
-.debug_info     0x00000000      0x472
+.debug_info     0x00000000      0x4c4
  .debug_info    0x00000000       0x24 build/boot2.o
  .debug_info    0x00000024       0x4f build/crc.o
- .debug_info    0x00000073      0x362 build/main.o
- .debug_info    0x000003d5       0x24 build/vectors_startup.o
- .debug_info    0x000003f9       0x3d /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
- .debug_info    0x00000436       0x3c /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x00000073      0x3b4 build/main.o
+ .debug_info    0x00000427       0x24 build/vectors_startup.o
+ .debug_info    0x0000044b       0x3d /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_info    0x00000488       0x3c /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
 
-.debug_abbrev   0x00000000      0x271
+.debug_abbrev   0x00000000      0x29e
  .debug_abbrev  0x00000000       0x14 build/boot2.o
  .debug_abbrev  0x00000014       0x40 build/crc.o
- .debug_abbrev  0x00000054      0x1bb build/main.o
- .debug_abbrev  0x0000020f       0x14 build/vectors_startup.o
- .debug_abbrev  0x00000223       0x28 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
- .debug_abbrev  0x0000024b       0x26 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x00000054      0x1e8 build/main.o
+ .debug_abbrev  0x0000023c       0x14 build/vectors_startup.o
+ .debug_abbrev  0x00000250       0x28 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x00000278       0x26 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
 
 .debug_aranges  0x00000000      0x100
  .debug_aranges
@@ -207,14 +207,14 @@ LOAD linker stubs
  .debug_aranges
                 0x000000e0       0x20 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
 
-.debug_str      0x00000000      0x317
- .debug_str     0x00000000      0x317 build/boot2.o
+.debug_str      0x00000000      0x322
+ .debug_str     0x00000000      0x322 build/boot2.o
                                  0x8b (size before relaxing)
- .debug_str     0x00000317      0x101 build/crc.o
- .debug_str     0x00000317      0x265 build/main.o
- .debug_str     0x00000317       0x83 build/vectors_startup.o
- .debug_str     0x00000317       0xb9 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
- .debug_str     0x00000317       0xba /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_str     0x00000322      0x101 build/crc.o
+ .debug_str     0x00000322      0x270 build/main.o
+ .debug_str     0x00000322       0x83 build/vectors_startup.o
+ .debug_str     0x00000322       0xb9 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_str     0x00000322       0xba /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
 
 .debug_loclists
                 0x00000000       0xa9
@@ -222,10 +222,10 @@ LOAD linker stubs
                 0x00000000       0xa9 build/main.o
 
 .debug_rnglists
-                0x00000000       0xe6
+                0x00000000       0xfe
  .debug_rnglists
-                0x00000000       0xe6 build/main.o
+                0x00000000       0xfe build/main.o
 
-.debug_frame    0x00000000       0xf8
- .debug_frame   0x00000000       0xd8 build/main.o
- .debug_frame   0x000000d8       0x20 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+.debug_frame    0x00000000      0x108
+ .debug_frame   0x00000000       0xe8 build/main.o
+ .debug_frame   0x000000e8       0x20 /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)

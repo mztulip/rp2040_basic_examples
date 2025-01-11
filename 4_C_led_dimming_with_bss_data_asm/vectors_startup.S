@@ -5,7 +5,7 @@
 .global vector_table
 .section .vectors
 vector_table:
-	.long  0x2003ffff //Set stack pointer to last address in RAM
+	.long  __StackTop //Set stack pointer to last address in RAM
 	.long   _reset_handler //Reset_Handler
 	.long   fault //NMI_Handler
 	.long   fault //HardFault_Handler
