@@ -1,0 +1,141 @@
+
+Discarded input sections
+
+ .data          0x00000000        0x0 build/boot2.o
+ .bss           0x00000000        0x0 build/boot2.o
+ .text          0x00000000        0x0 build/crc.o
+ .data          0x00000000        0x0 build/crc.o
+ .bss           0x00000000        0x0 build/crc.o
+ .text          0x00000000        0x0 build/main.o
+ .data          0x00000000        0x0 build/main.o
+ .bss           0x00000000        0x0 build/main.o
+ .data          0x00000000        0x0 build/vectors.o
+ .bss           0x00000000        0x0 build/vectors.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+flash            0x10000000         0x00200000         xr
+sram             0x20000000         0x00040000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD build/boot2.o
+LOAD build/crc.o
+LOAD build/main.o
+LOAD build/vectors.o
+
+.text           0x10000000      0x1aa
+                0x10000000                        _start_boot2 = .
+ build/boot2.o(.text)
+ .text          0x10000000       0x4c build/boot2.o
+                0x10000000                _stage2_boot
+                0x10000034                literals
+                0x1000004c                        _end_boot2 = .
+                0x100000fc                        . = (. + (0xfc - (_end_boot2 - _start_boot2)))
+ *fill*         0x1000004c       0xb0 
+ *(.crc*)
+ .crc           0x100000fc        0x4 build/crc.o
+                0x100000fc                crc
+                0x00000100                        . = 0x100
+ *(.vectors*)
+ .vectors       0x10000100       0x10 build/vectors.o
+                0x10000100                vector_table
+ *(.text*)
+ .text.delay    0x10000110       0x28 build/main.o
+                0x10000110                delay
+ .text.main     0x10000138       0x58 build/main.o
+                0x10000138                main
+ .text          0x10000190       0x1a build/vectors.o
+                0x10000190                _reset_handler
+OUTPUT(output/output.elf elf32-littlearm)
+LOAD linker stubs
+
+.glue_7         0x100001ac        0x0
+ .glue_7        0x100001ac        0x0 linker stubs
+
+.glue_7t        0x100001ac        0x0
+ .glue_7t       0x100001ac        0x0 linker stubs
+
+.vfp11_veneer   0x100001ac        0x0
+ .vfp11_veneer  0x100001ac        0x0 linker stubs
+
+.v4_bx          0x100001ac        0x0
+ .v4_bx         0x100001ac        0x0 linker stubs
+
+.iplt           0x100001ac        0x0
+ .iplt          0x100001ac        0x0 build/main.o
+
+.igot.plt       0x100001ac        0x0
+ .igot.plt      0x100001ac        0x0 build/main.o
+
+.rel.dyn        0x100001ac        0x0
+ .rel.iplt      0x100001ac        0x0 build/main.o
+
+.ARM.attributes
+                0x00000000       0x2e
+ .ARM.attributes
+                0x00000000       0x22 build/boot2.o
+ .ARM.attributes
+                0x00000022       0x2c build/crc.o
+ .ARM.attributes
+                0x0000004e       0x2c build/main.o
+ .ARM.attributes
+                0x0000007a       0x22 build/vectors.o
+
+.comment        0x00000000       0x1e
+ .comment       0x00000000       0x1e build/crc.o
+                                 0x1f (size before relaxing)
+ .comment       0x0000001e       0x1f build/main.o
+
+.debug_line     0x00000000      0x1f3
+ .debug_line    0x00000000       0x70 build/boot2.o
+ .debug_line    0x00000070       0x2c build/crc.o
+ .debug_line    0x0000009c      0x103 build/main.o
+ .debug_line    0x0000019f       0x54 build/vectors.o
+
+.debug_line_str
+                0x00000000       0x73
+ .debug_line_str
+                0x00000000       0x73 build/boot2.o
+                                 0x67 (size before relaxing)
+ .debug_line_str
+                0x00000073       0x57 build/vectors.o
+
+.debug_info     0x00000000      0x15c
+ .debug_info    0x00000000       0x24 build/boot2.o
+ .debug_info    0x00000024       0x4f build/crc.o
+ .debug_info    0x00000073       0xc5 build/main.o
+ .debug_info    0x00000138       0x24 build/vectors.o
+
+.debug_abbrev   0x00000000       0xef
+ .debug_abbrev  0x00000000       0x14 build/boot2.o
+ .debug_abbrev  0x00000014       0x40 build/crc.o
+ .debug_abbrev  0x00000054       0x87 build/main.o
+ .debug_abbrev  0x000000db       0x14 build/vectors.o
+
+.debug_aranges  0x00000000       0x80
+ .debug_aranges
+                0x00000000       0x20 build/boot2.o
+ .debug_aranges
+                0x00000020       0x18 build/crc.o
+ .debug_aranges
+                0x00000038       0x28 build/main.o
+ .debug_aranges
+                0x00000060       0x20 build/vectors.o
+
+.debug_str      0x00000000      0x16d
+ .debug_str     0x00000000      0x16d build/boot2.o
+                                 0x73 (size before relaxing)
+ .debug_str     0x0000016d       0xe5 build/crc.o
+ .debug_str     0x0000016d      0x16a build/main.o
+ .debug_str     0x0000016d       0x63 build/vectors.o
+
+.debug_rnglists
+                0x00000000       0x19
+ .debug_rnglists
+                0x00000000       0x19 build/main.o
+
+.debug_frame    0x00000000       0x4c
+ .debug_frame   0x00000000       0x4c build/main.o
