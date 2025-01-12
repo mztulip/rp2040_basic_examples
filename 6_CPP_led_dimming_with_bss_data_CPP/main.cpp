@@ -36,44 +36,6 @@ void failed(void)
     }
 }
 
-
-void led_on(void)
-{
-    //2.3.1.7. List of Registers
-    // SIO: GPIO_OUT_SET Register
-    // Offset: 0x014
-    // Description
-    // GPIO output value set
-    GPIO_OUT_SET |= 1 << 25;
-}
-
-void led_off(void)
-{
-    //2.3.1.7. List of Registers
-    // SIO: GPIO_OUT_CLR Register
-    // Offset: 0x018
-    // Description
-    // GPIO output value clear
-    GPIO_OUT_CLR |= 1 << 25;
-}
-
-void check_counter_overflow()
-{
-    if (counter >= counter_max)
-    {
-        counter = 0;
-        led_on();
-    }
-}
-
-void check_counter_compare()
-{
-    if(counter >= counter_compare_value)
-    {
-        led_off();
-    }
-}
-
 void set_pwm_value(uint32_t setpoint)
 {
     if(setpoint > counter_max)
@@ -132,6 +94,54 @@ void init_led_gpio()
     GPIO_OE_SET |= 1 << 25;
 }
 
+class led
+{
+
+
+public:
+    led()
+    {
+        init_led_gpio();
+    }
+
+    void on()
+    {
+        //2.3.1.7. List of Registers
+        // SIO: GPIO_OUT_SET Register
+        // Offset: 0x014
+        // Description
+        // GPIO output value set
+        GPIO_OUT_SET |= 1 << 25;
+    }
+
+    void off()
+    {
+        //2.3.1.7. List of Registers
+        // SIO: GPIO_OUT_CLR Register
+        // Offset: 0x018
+        // Description
+        // GPIO output value clear
+        GPIO_OUT_CLR |= 1 << 25;
+    }
+};
+
+void check_counter_overflow(led &x)
+{
+    if (counter >= counter_max)
+    {
+        counter = 0;
+        x.on();
+    }
+}
+
+void check_counter_compare(led &x)
+{
+    if(counter >= counter_compare_value)
+    {
+        x.off();
+    }
+}
+
 extern uint32_t __StackTop;
 
 class test 
@@ -154,6 +164,7 @@ class test
         return false;
     }
 };
+
 
 test test_object;
 
@@ -192,11 +203,13 @@ int main()
     init_led_gpio();
     check_startup_inits();
 
+    led blue_led;
+
     while (true)
     {
         counter++;
-        check_counter_overflow();
-        check_counter_compare();
+        check_counter_overflow(blue_led);
+        check_counter_compare(blue_led);
         process_led_dimming();
     }
 }
