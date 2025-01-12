@@ -134,10 +134,31 @@ void init_led_gpio()
 
 extern uint32_t __StackTop;
 
-int main()
+class test 
 {
-    init_led_gpio();
+    int x;
 
+    public:
+
+    test()
+    {
+        x = 123;
+    }
+
+    bool check()
+    {
+        if(x == 123)
+        {
+            return true;
+        }
+        return false;
+    }
+};
+
+test test_object;
+
+void check_startup_inits()
+{
     //This is also impossible to get here without working stack
     //If stack will be set outside of SRAM hard fault will be generated
     //main at the beginning pushes 5 registers on stack
@@ -158,9 +179,19 @@ int main()
     {
         failed();
     }
-    
 
- 
+        //Checking if constructor is executed
+    if(test_object.check() == false)
+    {
+        failed();
+    }
+}
+
+int main()
+{
+    init_led_gpio();
+    check_startup_inits();
+
     while (true)
     {
         counter++;

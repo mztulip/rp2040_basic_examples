@@ -31,9 +31,25 @@ SECTIONS
         *(.text*)                          
     } > flash
 
-    __etext = .;
 
-    .data : AT (__etext)
+    .preinit_array ALIGN(4): 
+    {
+        __preinit_array_start = .;
+        KEEP(*(.preinit_array))
+        __preinit_array_end = .;
+    } > flash
+
+
+    .init_array ALIGN(4): 
+    {
+        __init_array_start = .;
+        KEEP(*(.init_array))
+        __init_array_end = .;
+    } > flash
+
+    __start_data_at_flash = .;
+
+    .data : AT (__start_data_at_flash)
 	{
 		__data_start__ = .;
         . = ALIGN(4);

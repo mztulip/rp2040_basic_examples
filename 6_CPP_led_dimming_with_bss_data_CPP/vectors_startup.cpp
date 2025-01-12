@@ -7,12 +7,10 @@ extern uint32_t __data_end__;
 extern uint32_t __bss_start__;    
 extern uint32_t __bss_end__;     
 extern uint32_t __StackTop;
-extern "C" void(*__preinit_array_start)(void);
-extern "C" void(*__preinit_array_end)(void);
-extern "C" void(*__init_array_start)(void);
-extern "C" void(*__init_array_end)(void);
-
-
+extern "C" void(*__preinit_array_start [])(void);
+extern "C" void(*__preinit_array_end [])(void);
+extern "C" void(*__init_array_start [])(void);
+extern "C" void(*__init_array_end [])(void);
 
 //extern "C" makes a function-name in C++ have C linkage (compiler does not mangle the name)
 extern "C" void Default_Handler(void)
@@ -40,24 +38,30 @@ void Reset_Handler()
               &__bss_end__,
               0U);
 
+  //Good article about c++ startup https://embeddedartistry.com/blog/2019/04/17/exploring-startup-implementations-newlib-arm/
+  /* TODO: Maybe init/__libc_init_array
+  https://sourceware.org/git/gitweb.cgi?p=newlib-cygwin.git;a=blob_plain;f=newlib/libc/misc/init.c;hb=HEAD
+  also should be placed here when nanolib/newlib will be used 
+  It seems to be in text section and need to be executed
+  */
+
   // https://refspecs.linuxfoundation.org/elf/gabi4+/ch4.sheader.html#special_sections
   // .preinit_array:
   //   This section holds an array of function pointers that contributes to
   //    a single pre-initialization array for the executable or shared object containing the section.
   //I do not know where and when preinit is used.
   // Probably will be always empty
-  std::for_each( &__preinit_array_start,
-                &__preinit_array_end, 
+  std::for_each( __preinit_array_start,
+                __preinit_array_end, 
                 [](void (*f) (void)) {f();});
 
   // .init_array
   //   This section holds an array of function pointers that 
   //   contributes to a single initialization array for the executable 
   //   or shared object containing the section.
-  std::for_each( &__init_array_start,
-                  &__init_array_end, 
+  std::for_each( __init_array_start,
+                  __init_array_end, 
                   [](void (*f) (void)) {f();});
-
 
   main();
 
