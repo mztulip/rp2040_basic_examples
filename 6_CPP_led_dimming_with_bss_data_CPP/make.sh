@@ -13,7 +13,7 @@ TOOLCHAIN_SIZE=$TOOLCHAIN"size"
 TOOLCHAIN_OBJDUMP=$TOOLCHAIN"objdump"
 TOOLCHAIN_OBJCOPY=$TOOLCHAIN"objcopy"
 echo $TOOLCHAIN_GCC
-
+# https://gcc.gnu.org/onlinedocs/gcc/Option-Index.html
 # -c => Compile or assemble the source files, but do not link. 
 # -fdata-sections
 #-ffunction-sections => Place each function or data item into its own section in the output file if the target supports arbitrary sections. The name of the function or the name of the data item determines the section’s name in the output file. 
@@ -22,8 +22,15 @@ echo $TOOLCHAIN_GCC
 # https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
 # -Wall this enables all the warnings about constructions that some users consider questionable
 # -Wextra This enables some extra warning flags that are not enabled by -Wall
+# https://gcc.gnu.org/onlinedocs/gcc/C_002b_002b-Dialect-Options.html
+# -fno-threadsafe-statics Do not emit the extra code to use the routines specified in the C++ ABI for thread-safe initialization of local statics. You can use this option to reduce code size slightly in code that doesn’t need to be thread-safe.
+# -fno-use-cxa-get-exception-ptr Don’t use the __cxa_get_exception_ptr runtime routine. This causes std::uncaught_exception to be incorrect, but is necessary if the runtime routine is not available.
+#  -fno-rtti Disable generation of information about every class with virtual functions for use by the C++ run-time type identification features (dynamic_cast and typeid). If you don’t use those parts of the language, you can save some space by using this flag.
+# -fmessage-length=n Try to format error messages so that they fit on lines of about n characters. If n is zero, then no line-wrapping is done;
+# -fsigned-char Let the type char be signed, like signed char. 
+# -ffreestanding Assert that compilation targets a freestanding environment. This implies -fno-builtin. A freestanding environment is one in which the standard library may not exist, and program startup may not necessarily be at main
 GCC_FLAGS="-c -ffunction-sections -fdata-sections -mthumb -mcpu=cortex-m0plus -g -mfloat-abi=soft -Og"
-GPP_FLAGS="$GCC_FLAGS -std=gnu++1y -fno-exceptions -fno-threadsafe-statics -fno-use-cxa-atexit -fno-rtti -fmessage-length=0 -fsigned-char -Wall -Wextra -ffreestanding -fno-builtin -frecord-gcc-switches"
+GPP_FLAGS="$GCC_FLAGS -std=c++17 -fno-exceptions -fno-threadsafe-statics -fno-use-cxa-atexit -fno-rtti -fmessage-length=0 -fsigned-char -Wall -Wextra -ffreestanding -fno-builtin -frecord-gcc-switches"
 INCLUDES_BASIC=""
 INLCUDES="$INCLUDES_BASIC"
 
