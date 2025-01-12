@@ -1,6 +1,13 @@
-#include <stdint.h>
-#include <stdbool.h>
+#include <cstdint>
 #include "boot2/addressmap.h"
+
+volatile uint32_t &GPIO_OUT_XOR = *reinterpret_cast<uint32_t *>(SIO_BASE+0x1c);
+volatile uint32_t &GPIO_OUT_SET = *reinterpret_cast<uint32_t *>(SIO_BASE+0x14);
+volatile uint32_t &GPIO_OUT_CLR = *reinterpret_cast<uint32_t *>(SIO_BASE+0x18);
+volatile uint32_t &RESETS_BASE_REG = *reinterpret_cast<uint32_t *>(RESETS_BASE);
+volatile uint32_t &RESET_DONE = *reinterpret_cast<uint32_t *>(RESETS_BASE+0x08);
+volatile uint32_t &GPIO25_CTRL = *reinterpret_cast<uint32_t *>(IO_BANK0_BASE+0xcc);
+volatile uint32_t &GPIO_OE_SET = *reinterpret_cast<uint32_t *>(SIO_BASE+0x24);
 
 const int counter_max = 500;
 uint32_t counter_compare_value = 100;
@@ -25,7 +32,7 @@ void failed(void)
         // Description
         // GPIO output value XO
         // xor bit for GPIO 25 changing led state
-        *(volatile uint32_t *) (SIO_BASE+0x1c) |= 1 << 25;
+        GPIO_OUT_XOR |= 1 << 25;
     }
 }
 
@@ -37,7 +44,7 @@ void led_on(void)
     // Offset: 0x014
     // Description
     // GPIO output value set
-    *(volatile uint32_t *) (SIO_BASE+0x14) |= 1 << 25;
+    GPIO_OUT_SET |= 1 << 25;
 }
 
 void led_off(void)
@@ -47,10 +54,10 @@ void led_off(void)
     // Offset: 0x018
     // Description
     // GPIO output value clear
-    *(volatile uint32_t *) (SIO_BASE+0x18) |= 1 << 25;
+    GPIO_OUT_CLR |= 1 << 25;
 }
 
-void check_counter_overflow(void)
+void check_counter_overflow()
 {
     if (counter >= counter_max)
     {
@@ -59,7 +66,7 @@ void check_counter_overflow(void)
     }
 }
 
-void check_counter_compare(void)
+void check_counter_compare()
 {
     if(counter >= counter_compare_value)
     {
@@ -97,23 +104,23 @@ void process_led_dimming()
     set_pwm_value(pwm_setpoint);
 }
 
-void init_led_gpio(void)
+void init_led_gpio()
 {
      //Activate IO_BANK0 ba setting bit 5 to 0
     //rp2040 datasheet 2.14.3. List of Registers
-    *(volatile uint32_t *) (RESETS_BASE) &= ~(1 << 5);
+    RESETS_BASE_REG &= ~(1 << 5);
 
     //RESETS: RESET_DONE Register
     //Offset: 0x8
     //Wait for IO_BANK0 to be ready bit 5 should be  set
-    while (!( *(volatile uint32_t *) (RESETS_BASE+0x08) & (1 << 5)));
+    while (!( RESET_DONE & (1 << 5)));
 
 
     //2.19.6. List of Registers
     //2.19.6.1. IO - User Bank
     //0x0cc GPIO25_CTRL GPIO control including function select and overrides
     // GPIO 25 BANK 0 CTRL
-    *(volatile uint32_t *) (IO_BANK0_BASE+0xcc) = 5;
+    GPIO25_CTRL = 5;
 
     //2.3.1.7. List of Registers
     //The SIO registers start at a base address of 0xd0000000 (defined as SIO_BASE in SDK)
@@ -122,12 +129,12 @@ void init_led_gpio(void)
     //Description
     //GPIO output enable set
     //GPIO 25 as Outputs using SIO
-    *(volatile uint32_t *) (SIO_BASE+0x24) |= 1 << 25;
+    GPIO_OE_SET |= 1 << 25;
 }
 
 extern uint32_t __StackTop;
 
-int main(void)
+int main()
 {
     init_led_gpio();
 

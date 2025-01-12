@@ -153,7 +153,7 @@ void failed(void)
         // Description
         // GPIO output value XO
         // xor bit for GPIO 25 changing led state
-        *(volatile uint32_t *) (SIO_BASE+0x1c) |= 1 << 25;
+        GPIO_OUT_XOR |= 1 << 25;
 10000136:	4a03      	ldr	r2, [pc, #12]	@ (10000144 <_Z6failedv+0x14>)
 10000138:	6811      	ldr	r1, [r2, #0]
 1000013a:	2380      	movs	r3, #128	@ 0x80
@@ -170,7 +170,7 @@ void failed(void)
     // Offset: 0x014
     // Description
     // GPIO output value set
-    *(volatile uint32_t *) (SIO_BASE+0x14) |= 1 << 25;
+    GPIO_OUT_SET |= 1 << 25;
 10000148:	4a03      	ldr	r2, [pc, #12]	@ (10000158 <_Z6led_onv+0x10>)
 1000014a:	6811      	ldr	r1, [r2, #0]
 1000014c:	2380      	movs	r3, #128	@ 0x80
@@ -188,7 +188,7 @@ void failed(void)
     // Offset: 0x018
     // Description
     // GPIO output value clear
-    *(volatile uint32_t *) (SIO_BASE+0x18) |= 1 << 25;
+    GPIO_OUT_CLR |= 1 << 25;
 1000015c:	4a03      	ldr	r2, [pc, #12]	@ (1000016c <_Z7led_offv+0x10>)
 1000015e:	6811      	ldr	r1, [r2, #0]
 10000160:	2380      	movs	r3, #128	@ 0x80
@@ -202,7 +202,7 @@ void failed(void)
 
 10000170 <_Z22check_counter_overflowv>:
 
-void check_counter_overflow(void)
+void check_counter_overflow()
 {
 10000170:	b510      	push	{r4, lr}
     if (counter >= counter_max)
@@ -230,7 +230,7 @@ void check_counter_overflow(void)
 
 10000190 <_Z21check_counter_comparev>:
 
-void check_counter_compare(void)
+void check_counter_compare()
 {
 10000190:	b510      	push	{r4, lr}
     if(counter >= counter_compare_value)
@@ -334,11 +334,11 @@ void process_led_dimming()
 
 10000214 <_Z13init_led_gpiov>:
 
-void init_led_gpio(void)
+void init_led_gpio()
 {
      //Activate IO_BANK0 ba setting bit 5 to 0
     //rp2040 datasheet 2.14.3. List of Registers
-    *(volatile uint32_t *) (RESETS_BASE) &= ~(1 << 5);
+    RESETS_BASE_REG &= ~(1 << 5);
 10000214:	4a09      	ldr	r2, [pc, #36]	@ (1000023c <_Z13init_led_gpiov+0x28>)
 10000216:	6813      	ldr	r3, [r2, #0]
 10000218:	2120      	movs	r1, #32
@@ -348,7 +348,7 @@ void init_led_gpio(void)
     //RESETS: RESET_DONE Register
     //Offset: 0x8
     //Wait for IO_BANK0 to be ready bit 5 should be  set
-    while (!( *(volatile uint32_t *) (RESETS_BASE+0x08) & (1 << 5)));
+    while (!( RESET_DONE & (1 << 5)));
 1000021e:	4b08      	ldr	r3, [pc, #32]	@ (10000240 <_Z13init_led_gpiov+0x2c>)
 10000220:	681b      	ldr	r3, [r3, #0]
 10000222:	069b      	lsls	r3, r3, #26
@@ -358,7 +358,7 @@ void init_led_gpio(void)
     //2.19.6.1. IO - User Bank
     //0x0cc GPIO25_CTRL GPIO control including function select and overrides
     // GPIO 25 BANK 0 CTRL
-    *(volatile uint32_t *) (IO_BANK0_BASE+0xcc) = 5;
+    GPIO25_CTRL = 5;
 10000226:	4b07      	ldr	r3, [pc, #28]	@ (10000244 <_Z13init_led_gpiov+0x30>)
 10000228:	2205      	movs	r2, #5
 1000022a:	601a      	str	r2, [r3, #0]
@@ -367,7 +367,7 @@ void init_led_gpio(void)
     //Description
     //GPIO output enable set
     //GPIO 25 as Outputs using SIO
-    *(volatile uint32_t *) (SIO_BASE+0x24) |= 1 << 25;
+    GPIO_OE_SET |= 1 << 25;
 1000022c:	4a06      	ldr	r2, [pc, #24]	@ (10000248 <_Z13init_led_gpiov+0x34>)
 1000022e:	6811      	ldr	r1, [r2, #0]
 10000230:	2380      	movs	r3, #128	@ 0x80
@@ -386,7 +386,7 @@ void init_led_gpio(void)
 
 extern uint32_t __StackTop;
 
-int main(void)
+int main()
 {
 1000024c:	b510      	push	{r4, lr}
     init_led_gpio();
@@ -502,7 +502,7 @@ extern "C" void Default_Handler(void)
 100002cc <_Z13Reset_Handlerv>:
 }
 
-int main(void);
+int main();
 
 void Reset_Handler()
 {
@@ -537,10 +537,10 @@ void Reset_Handler()
 100002e4:	4a06      	ldr	r2, [pc, #24]	@ (10000300 <_Z13Reset_Handlerv+0x34>)
 100002e6:	4293      	cmp	r3, r2
 100002e8:	d1fa      	bne.n	100002e0 <_Z13Reset_Handlerv+0x14>
+
+  //   This section holds an array of function pointers 
   //   that contributes to a single termination array for 
   //   the executable or shared object containing the section.
-
-
 
   main();
 100002ea:	f7ff ffaf 	bl	1000024c <main>

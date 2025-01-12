@@ -17,7 +17,7 @@ extern "C" void Default_Handler(void)
     }
 }
 
-int main(void);
+int main();
 
 void Reset_Handler()
 {
@@ -49,8 +49,6 @@ void Reset_Handler()
   //   This section holds an array of function pointers 
   //   that contributes to a single termination array for 
   //   the executable or shared object containing the section.
-
-
 
   main();
   for (;;);
