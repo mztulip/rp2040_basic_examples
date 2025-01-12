@@ -18,7 +18,7 @@ echo $TOOLCHAIN_GCC
 #-ffunction-sections => Place each function or data item into its own section in the output file if the target supports arbitrary sections. The name of the function or the name of the data item determines the section’s name in the output file. 
 # -mthumb => Select between generating code that executes in ARM and Thumb states
 # -g Produce debugging information in the operating system’s native format (stabs, COFF, XCOFF, or DWARF). GDB can work with this debugging information. 
-GCC_FLAGS="-c -ffunction-sections -fdata-sections -mthumb -mcpu=cortex-m0plus -g -mfloat-abi=soft"
+GCC_FLAGS="-c -ffunction-sections -fdata-sections -mthumb -mcpu=cortex-m0plus -g -mfloat-abi=soft -O3"
 GPP_FLAGS="$GCC_FLAGS -std=gnu++1y -fno-exceptions -fno-threadsafe-statics -fno-use-cxa-atexit -fno-rtti -fmessage-length=0 -fsigned-char -Wall -Wextra -ffreestanding -fno-builtin -frecord-gcc-switches"
 INCLUDES_BASIC=""
 INLCUDES="$INCLUDES_BASIC"
