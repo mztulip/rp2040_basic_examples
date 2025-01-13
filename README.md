@@ -21,9 +21,9 @@ https://github.com/vxj9800/bareMetalRP2040
 
 
 # Interesting references:
-https://github.com/carlosftm/RPi-Pico-Baremetal
-https://github.com/cortexm/baremetal/tree/master
-https://github.com/ataradov/mcu-starter-projects/tree/master/rp2040
-http://www.ethernut.de/en/documents/arm-inline-asm.html
-https://embeddedartistry.com/blog/2019/04/17/exploring-startup-implementations-newlib-arm/
-https://five-embeddev.com/baremetal/startup_cxx/
+- https://github.com/carlosftm/RPi-Pico-Baremetal
+- https://github.com/cortexm/baremetal/tree/master
+- https://github.com/ataradov/mcu-starter-projects/tree/master/rp2040
+- http://www.ethernut.de/en/documents/arm-inline-asm.html
+- https://embeddedartistry.com/blog/2019/04/17/exploring-startup-implementations-newlib-arm/
+- https://five-embeddev.com/baremetal/startup_cxx/
