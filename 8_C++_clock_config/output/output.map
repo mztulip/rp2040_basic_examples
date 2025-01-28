@@ -1,0 +1,283 @@
+Archive member included to satisfy reference by file (symbol)
+
+/usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+                              build/vectors_startup.o (memmove)
+
+Discarded input sections
+
+ .data          0x00000000        0x0 build/boot2.o
+ .bss           0x00000000        0x0 build/boot2.o
+ .text          0x00000000        0x0 build/crc.o
+ .data          0x00000000        0x0 build/crc.o
+ .bss           0x00000000        0x0 build/crc.o
+ .group         0x00000000        0x8 build/main.o
+ .text          0x00000000        0x0 build/main.o
+ .data          0x00000000        0x0 build/main.o
+ .bss           0x00000000        0x0 build/main.o
+ .rodata.GPIO_OE_SET
+                0x00000000        0x4 build/main.o
+ .rodata.GPIO25_CTRL
+                0x00000000        0x4 build/main.o
+ .rodata.RESET_DONE
+                0x00000000        0x4 build/main.o
+ .rodata.RESETS_BASE_REG
+                0x00000000        0x4 build/main.o
+ .rodata.GPIO_OUT_CLR
+                0x00000000        0x4 build/main.o
+ .rodata.GPIO_OUT_SET
+                0x00000000        0x4 build/main.o
+ .rodata.GPIO_OUT_XOR
+                0x00000000        0x4 build/main.o
+ .group         0x00000000        0xc build/vectors_startup.o
+ .text          0x00000000        0x0 build/vectors_startup.o
+ .data          0x00000000        0x0 build/vectors_startup.o
+ .bss           0x00000000        0x0 build/vectors_startup.o
+ .text          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+ .data          0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+ .bss           0x00000000        0x0 /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+flash            0x10000000         0x00200000         xr
+sram             0x20000000         0x00040000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD build/boot2.o
+LOAD build/crc.o
+LOAD build/main.o
+LOAD build/vectors_startup.o
+LOAD /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libstdc++.a
+LOAD /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a
+START GROUP
+LOAD /usr/lib/gcc/arm-none-eabi/14.2.0/thumb/v6-m/nofp/libgcc.a
+LOAD /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a
+END GROUP
+                0x00000800                        _minimum_stack_size = 0x800
+
+.text           0x10000000      0x444
+                0x10000000                        _start_boot2 = .
+ build/boot2.o(.text)
+ .text          0x10000000       0x4c build/boot2.o
+                0x10000000                _stage2_boot
+                0x10000034                literals
+                0x1000004c                        _end_boot2 = .
+                0x100000fc                        . = (. + (0xfc - (_end_boot2 - _start_boot2)))
+ *fill*         0x1000004c       0xb0 
+ *(.crc*)
+ .crc           0x100000fc        0x4 build/crc.o
+                0x100000fc                crc
+                0x00000100                        . = 0x100
+ *(.vectors*)
+ .vectors       0x10000100       0x40 build/vectors_startup.o
+ *(.text*)
+ .text._Z25external_crystal_osc_initv
+                0x10000140       0x28 build/main.o
+                0x10000140                external_crystal_osc_init()
+ .text._Z15pll_120MHz_initv
+                0x10000168       0x4c build/main.o
+                0x10000168                pll_120MHz_init()
+ .text._Z14clock_ref_initv
+                0x100001b4       0x24 build/main.o
+                0x100001b4                clock_ref_init()
+ .text._Z17clock_sysclk_initv
+                0x100001d8       0x20 build/main.o
+                0x100001d8                clock_sysclk_init()
+ .text._Z13rosc_shutdownv
+                0x100001f8       0x24 build/main.o
+                0x100001f8                rosc_shutdown()
+ .text._Z17clock_init_120MHzv
+                0x1000021c       0x18 build/main.o
+                0x1000021c                clock_init_120MHz()
+ .text._ZN3ledC2Ev
+                0x10000234       0x38 build/main.o
+                0x10000234                led::led()
+                0x10000234                led::led()
+ .text._Z41__static_initialization_and_destruction_0v
+                0x1000026c       0x10 build/main.o
+ .text._Z15SysTick_Handlerv
+                0x1000027c       0x14 build/main.o
+                0x1000027c                SysTick_Handler()
+ .text._Z12systick_initv
+                0x10000290       0x14 build/main.o
+                0x10000290                systick_init()
+ .text.main     0x100002a4       0x20 build/main.o
+                0x100002a4                main
+ .text._GLOBAL__sub_I_GPIO_OUT_XOR
+                0x100002c4        0x8 build/main.o
+ .text.Default_Handler
+                0x100002cc        0x2 build/vectors_startup.o
+                0x100002cc                BusFault_Handler()
+                0x100002cc                HardFault_Handler()
+                0x100002cc                PendSV_Handler()
+                0x100002cc                MemManage_Handler()
+                0x100002cc                NMI_Handler()
+                0x100002cc                SVC_Handler()
+                0x100002cc                Default_Handler
+                0x100002cc                DebugMon_Handler()
+                0x100002cc                UsageFault_Handler()
+ .text._ZSt8for_eachIPPFvvEZ13Reset_HandlerEUlS1_E_ET0_T_S5_S4_
+                0x100002ce       0x14 build/vectors_startup.o
+ .text._ZSt8for_eachIPPFvvEZ13Reset_HandlerEUlS1_E0_ET0_T_S5_S4_
+                0x100002e2       0x14 build/vectors_startup.o
+ .text._ZNSt11__copy_moveILb0ELb1ESt26random_access_iterator_tagE8__copy_mImmEEPT0_PT_S6_S4_
+                0x100002f6       0x2c build/vectors_startup.o
+                0x100002f6                unsigned long* std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<unsigned long, unsigned long>(unsigned long*, unsigned long*, unsigned long*)
+ *fill*         0x10000322        0x2 
+ .text.Reset_Handler
+                0x10000324       0x5c build/vectors_startup.o
+                0x10000324                Reset_Handler
+ .text.memmove  0x10000380       0xc4 /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+                0x10000380                memmove
+
+.glue_7         0x10000444        0x0
+ .glue_7        0x10000444        0x0 linker stubs
+
+.glue_7t        0x10000444        0x0
+ .glue_7t       0x10000444        0x0 linker stubs
+
+.vfp11_veneer   0x10000444        0x0
+ .vfp11_veneer  0x10000444        0x0 linker stubs
+
+.v4_bx          0x10000444        0x0
+ .v4_bx         0x10000444        0x0 linker stubs
+
+.iplt           0x10000444        0x0
+ .iplt          0x10000444        0x0 build/main.o
+
+.preinit_array  0x10000444        0x0
+                0x10000444                        __preinit_array_start = .
+ *(.preinit_array)
+                0x10000444                        __preinit_array_end = .
+
+.init_array     0x10000444        0x4
+                0x10000444                        __init_array_start = .
+ *(.init_array)
+ .init_array    0x10000444        0x4 build/main.o
+                0x10000448                        __init_array_end = .
+                0x10000448                        __start_data_at_flash = .
+
+.rel.dyn        0x10000448        0x0
+ .rel.iplt      0x10000448        0x0 build/main.o
+
+.data           0x20000000        0x0 load address 0x10000448
+                0x20000000                        __data_start__ = .
+                0x20000000                        . = ALIGN (0x4)
+ *(.data*)
+                0x20000000                        __data_end__ = .
+
+.igot.plt       0x20000000        0x0
+ .igot.plt      0x20000000        0x0 build/main.o
+
+.bss            0x20000000        0x4
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        __bss_start__ = .
+ *(.bss*)
+ .bss.blue_led  0x20000000        0x1 build/main.o
+                0x20000000                blue_led
+ *(COMMON)
+                0x20000004                        . = ALIGN (0x4)
+ *fill*         0x20000001        0x3 
+                0x20000004                        __bss_end__ = .
+                0x20040000                        __StackTop = (ORIGIN (sram) + LENGTH (sram))
+                0x00000001                        ASSERT (((__bss_end__ + _minimum_stack_size) <= __StackTop), There is not enough space in RAM for stack.)
+OUTPUT(output/output.elf elf32-littlearm)
+LOAD linker stubs
+
+.ARM.attributes
+                0x00000000       0x2e
+ .ARM.attributes
+                0x00000000       0x22 build/boot2.o
+ .ARM.attributes
+                0x00000022       0x2c build/crc.o
+ .ARM.attributes
+                0x0000004e       0x2c build/main.o
+ .ARM.attributes
+                0x0000007a       0x2c build/vectors_startup.o
+ .ARM.attributes
+                0x000000a6       0x2c /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+
+.comment        0x00000000       0x3c
+ .comment       0x00000000       0x3c build/crc.o
+                                 0x1f (size before relaxing)
+ .comment       0x0000003c       0x1f build/main.o
+ .comment       0x0000003c       0x1f build/vectors_startup.o
+ .comment       0x0000003c       0x1f /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+
+.GCC.command.line
+                0x00000000       0xfc
+ .GCC.command.line
+                0x00000000       0xfc build/main.o
+ .GCC.command.line
+                0x000000fc       0xfc build/vectors_startup.o
+
+.debug_line     0x00000000      0xa5a
+ .debug_line    0x00000000       0x70 build/boot2.o
+ .debug_line    0x00000070       0x2c build/crc.o
+ .debug_line    0x0000009c      0x468 build/main.o
+ .debug_line    0x00000504      0x343 build/vectors_startup.o
+ .debug_line    0x00000847      0x213 /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+
+.debug_line_str
+                0x00000000       0x70
+ .debug_line_str
+                0x00000000       0x70 build/boot2.o
+
+.debug_info     0x00000000     0x1cd4
+ .debug_info    0x00000000       0x24 build/boot2.o
+ .debug_info    0x00000024       0x4f build/crc.o
+ .debug_info    0x00000073      0xc5a build/main.o
+ .debug_info    0x00000ccd      0xebf build/vectors_startup.o
+ .debug_info    0x00001b8c      0x148 /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+
+.debug_abbrev   0x00000000      0x82b
+ .debug_abbrev  0x00000000       0x14 build/boot2.o
+ .debug_abbrev  0x00000014       0x40 build/crc.o
+ .debug_abbrev  0x00000054      0x355 build/main.o
+ .debug_abbrev  0x000003a9      0x3bf build/vectors_startup.o
+ .debug_abbrev  0x00000768       0xc3 /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+
+.debug_aranges  0x00000000      0x110
+ .debug_aranges
+                0x00000000       0x20 build/boot2.o
+ .debug_aranges
+                0x00000020       0x18 build/crc.o
+ .debug_aranges
+                0x00000038       0x78 build/main.o
+ .debug_aranges
+                0x000000b0       0x40 build/vectors_startup.o
+ .debug_aranges
+                0x000000f0       0x20 /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+
+.debug_str      0x00000000     0x108a
+ .debug_str     0x00000000     0x108a build/boot2.o
+                                 0x7c (size before relaxing)
+ .debug_str     0x0000108a       0xf2 build/crc.o
+ .debug_str     0x0000108a      0x812 build/main.o
+ .debug_str     0x0000108a      0xb02 build/vectors_startup.o
+ .debug_str     0x0000108a      0x1ed /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+
+.debug_loclists
+                0x00000000      0x7be
+ .debug_loclists
+                0x00000000      0x128 build/main.o
+ .debug_loclists
+                0x00000128      0x231 build/vectors_startup.o
+ .debug_loclists
+                0x00000359      0x465 /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+
+.debug_rnglists
+                0x00000000       0x94
+ .debug_rnglists
+                0x00000000       0x55 build/main.o
+ .debug_rnglists
+                0x00000055       0x2b build/vectors_startup.o
+ .debug_rnglists
+                0x00000080       0x14 /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
+
+.debug_frame    0x00000000      0x1b0
+ .debug_frame   0x00000000       0xf0 build/main.o
+ .debug_frame   0x000000f0       0x8c build/vectors_startup.o
+ .debug_frame   0x0000017c       0x34 /usr/lib/gcc/arm-none-eabi/14.2.0/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memmove.o)
